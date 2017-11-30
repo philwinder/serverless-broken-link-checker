@@ -1,0 +1,11 @@
+{
+  "name": "broken-link-checker",
+  "version": "1.0.0",
+  "description": "Checks for 404s and emails results using Mailgun",
+  "author": "",
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "serverless-python-requirements": "^3.0.10"
+  }
+}

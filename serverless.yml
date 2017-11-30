@@ -1,0 +1,31 @@
+service: broken-link-checker
+frameworkVersion: ">=1.2.0 <2.0.0"
+
+provider:
+  name: aws
+  runtime: python3.6
+  memorySize: 512
+  timeout: 300
+  environment:
+    MAILGUN_DOMAIN_NAME: ${env:MAILGUN_DOMAIN_NAME} # Mailgun domain name
+    MAILGUN_API_KEY:  ${env:MAILGUN_API_KEY}        # Mailgun API key
+    EMAIL:  ${env:EMAIL}                            # Email address to send the report to
+    URL: ${env:URL}                                 # URL to check
+
+package:
+  exclude:
+    - node_modules/**
+    - .venv/**
+    - venv/**
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+
+plugins:
+  - serverless-python-requirements
+functions:
+  cron:
+    handler: handler.run
+    events:
+      - schedule: rate(1 day)
